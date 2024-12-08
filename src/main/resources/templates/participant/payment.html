@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <th:block th:replace="~{base :: head}"></th:block>
+    <title>Paiement</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Inclusion de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Inclusion de Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+<!-- Intégration du fragment header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Contenu principal de la page -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Card pour le formulaire de paiement -->
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">Paiement pour l'événement : <span th:text="${event.title}"></span></h3>
+                    <p class="text-center mb-4">Montant : $<span th:text="${event.price}"></span></p>
+
+                    <!-- Formulaire de paiement -->
+                    <form id="payment-form" method="POST" class="mb-4">
+                        <input type="hidden" name="eventId" th:value="${event.id}">
+                        <input type="hidden" name="participantId" th:value="${participant.id}">
+
+                        <!-- Méthode de paiement -->
+                        <div class="form-group mb-3">
+                            <label for="method" class="form-label">Méthode de paiement :</label>
+                            <select name="method" id="method" class="form-control form-control-lg" required>
+                                <option value="stripe">Stripe</option>
+                                <option value="carte">Carte bancaire</option>
+                            </select>
+                        </div>
+
+                        <!-- Bouton de paiement -->
+                        <div class="form-group text-center">
+                            <button id="checkout-button" class="btn btn-success btn-lg w-100">
+                                <i class="bi bi-credit-card"></i> Payer Maintenant
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Intégration du fragment footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- Intégration du fragment scripts -->
+<div th:replace="~{base :: scripts}"></div>
+
+<!-- Script pour le paiement avec Stripe -->
+<script th:inline="javascript">
+    const stripe = Stripe('pk_test_51QO54ZK7eimpfocD8w86ctQy6K2lyH5uYeJhMKSd3kPTdkEVLOxSyXIHNPbwQCATEkBUlvl46XUVgtFTS5pBTdvX00YBz1WLWn'); // Clé publique Stripe
+
+    document.getElementById('checkout-button').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Variables dynamiques Thymeleaf
+        const eventId = "[[${event.id}]]" ;
+        const participantId = "[[${participant.id}]]" ;
+        const price = "[[${event.price}]]" ;
+        const eventName = "[[${event.title}]]" ;
+
+        // Vérification des valeurs
+        if (eventId === 'null' || participantId === 'null' || price === 0 || eventName === 'null') {
+            alert('Les informations de l\'événement ou du participant sont incorrectes.');
+            return;
+        }
+
+        // Requête fetch pour créer la session de paiement
+        fetch('/payments/create-checkout-session', {
+            method: 'POST', // Utilisation de la méthode POST
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                eventId: eventId,
+                participantId: participantId,
+                price: price,
+                eventName: eventName,
+            }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la création de la session de paiement.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.url) {
+                    window.location.href = data.url; // Redirection vers Stripe pour finaliser le paiement
+                } else {
+                    alert('Erreur : aucune URL de session de paiement reçue.');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur :', error);
+                alert(error.message);
+            });
+    });
+</script>
+
+</body>
+</html>

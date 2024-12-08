@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <th:block th:replace="~{base :: head}"></th:block>
+    <title>Événements disponibles</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+</head>
+<body>
+
+<!-- Intégration du fragment header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Contenu principal de la page -->
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Événements disponibles</h1>
+
+    <!-- Tableau des événements -->
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Lieu</th>
+            <th>Capacité</th>
+            <th>Prix</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.title}"></td>
+            <td th:text="${event.description}"></td>
+            <td th:text="${event.date}"></td>
+            <td th:text="${event.location}"></td>
+            <td th:text="${event.capacity}"></td>
+            <td th:text="${event.price} + '€'"></td>
+            <td>
+                <form th:action="@{/participant/events/pay/{id}(id=${event.id})}" method="post">
+                    <button type="submit" class="btn btn-success">Participer</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Intégration du fragment footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- Intégration du fragment scripts -->
+<div th:replace="~{base :: scripts}"></div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <!-- Inclusion de la section 'head' de base.html -->
+    <th:block th:replace="~{base :: head}"></th:block>
+    <title>Inscription</title>
+</head>
+<body>
+<!-- Inclure l'en-tête -->
+<th:block th:replace="~{fragments/header :: header}"></th:block>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">Inscription</h3>
+                    <form th:action="@{/register}" method="post">
+                        <!-- Champ pour le nom d'utilisateur -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nom d'utilisateur :</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Entrez votre nom d'utilisateur" required />
+                            </div>
+                        </div>
+
+                        <!-- Champ pour l'email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email :</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Entrez votre email" required />
+                            </div>
+                        </div>
+
+                        <!-- Champ pour le mot de passe -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe :</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Entrez votre mot de passe" required />
+                            </div>
+                        </div>
+
+                        <!-- Bouton d'inscription -->
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-3">
+                            <i class="bi bi-box-arrow-in-right"></i> S'inscrire
+                        </button>
+                    </form>
+                </div>
+                <div class="card-footer text-center mt-3">
+                    <p class="mb-0">Vous avez déjà un compte ? <a href="/home" class="text-primary">Se connecter ici</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Inclure le pied de page -->
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+<!-- Inclure la section des scripts de base.html -->
+<th:block th:replace="~{base :: scripts}"></th:block>
+</body>
+</html>
+
+

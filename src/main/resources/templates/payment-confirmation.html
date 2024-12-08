@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{base :: head}"></th:block>
+    <title>Confirmation de Paiement</title>
+    <!-- Lien vers le fichier CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Intégration du fragment header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Contenu principal -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Card pour la confirmation de paiement -->
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">Confirmation de Paiement</h3>
+                    <p class="text-center mb-4">Merci pour votre paiement ! Votre inscription à l'événement a été confirmée.</p>
+
+                    <!-- Détails du paiement -->
+                    <div class="details mb-4">
+                        <h4>Détails du paiement :</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Événement :</strong> <span th:text="${event.title}"></span></li>
+                            <li class="list-group-item"><strong>Date :</strong> <span th:text="${event.date}"></span></li>
+                            <li class="list-group-item"><strong>Lieu :</strong> <span th:text="${event.location}"></span></li>
+                            <li class="list-group-item"><strong>Montant payé :</strong> <span th:text="${paiement.montant}"></span> EUR</li>
+                            <li class="list-group-item"><strong>Méthode de paiement :</strong> <span th:text="${paiement.methode}"></span></li>
+                            <li class="list-group-item"><strong>Statut :</strong> <span th:text="${paiement.statut}"></span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Bouton de retour -->
+                    <div class="text-center">
+                        <a href="/participant/events" class="btn btn-primary btn-lg w-100">Retour à mes événements</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Intégration du fragment footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- Intégration du fragment scripts -->
+<div th:replace="~{base :: scripts}"></div>
+
+</body>
+</html>

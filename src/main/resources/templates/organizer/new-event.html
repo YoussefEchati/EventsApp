@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <th:block th:replace="~{base :: head}"></th:block>
+    <title>Ajouter un événement</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+</head>
+<body>
+
+<!-- Intégration du fragment header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Contenu principal de la page -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Card pour le formulaire -->
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">Ajouter un nouvel événement</h3>
+
+                    <!-- Formulaire d'ajout d'événement -->
+                    <form action="/organizer/events" method="post" th:object="${event}">
+
+                        <!-- Titre -->
+                        <div class="form-group mb-3">
+                            <label for="title" class="form-label">Titre :</label>
+                            <input type="text" id="title" name="title" th:value="*{title}" class="form-control form-control-lg" required placeholder="Entrez le titre de l'événement">
+                        </div>
+
+                        <!-- Description -->
+                        <div class="form-group mb-3">
+                            <label for="description" class="form-label">Description :</label>
+                            <textarea id="description" name="description" th:value="*{description}" class="form-control form-control-lg" required placeholder="Décrivez l'événement en quelques mots"></textarea>
+                        </div>
+
+                        <!-- Date -->
+                        <div class="form-group mb-3">
+                            <label for="date" class="form-label">Date :</label>
+                            <input type="date" id="date" name="date" th:value="*{date}" class="form-control form-control-lg" required>
+                        </div>
+
+                        <!-- Lieu -->
+                        <div class="form-group mb-3">
+                            <label for="location" class="form-label">Lieu :</label>
+                            <input type="text" id="location" name="location" th:value="*{location}" class="form-control form-control-lg" required placeholder="Indiquez le lieu de l'événement">
+                        </div>
+
+                        <!-- Capacité -->
+                        <div class="form-group mb-3">
+                            <label for="capacity" class="form-label">Capacité :</label>
+                            <input type="number" id="capacity" name="capacity" th:value="*{capacity}" class="form-control form-control-lg" required placeholder="Entrez la capacité maximale de participants">
+                        </div>
+
+                        <!-- Prix -->
+                        <div class="form-group mb-3">
+                            <label for="price" class="form-label">Prix (€) :</label>
+                            <input type="number" id="price" name="price" th:value="*{price}" class="form-control form-control-lg" required placeholder="Entrez le prix de l'événement">
+                        </div>
+
+                        <!-- Bouton de soumission -->
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="bi bi-check-circle"></i> Créer l'événement
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Intégration du fragment footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- Intégration du fragment scripts -->
+<div th:replace="~{base :: scripts}"></div>
+
+</body>
+</html>
