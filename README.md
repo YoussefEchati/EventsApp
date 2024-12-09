@@ -15,7 +15,7 @@ EventsApp est une application web développée avec Spring Boot qui permet de g�
 ## Comment exécuter le projet
 1. Clonez ce dépôt :
    ```bash
-    https://github.com/YoussefEchati/eventsApp.git
+    git clone https://github.com/YoussefEchati/eventsApp.git
 
   
 2. Importez-le dans votre IDE (IntelliJ, Eclipse).
