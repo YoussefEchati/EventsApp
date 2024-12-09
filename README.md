@@ -23,6 +23,9 @@ EventsApp est une application web développée avec Spring Boot qui permet de g�
 4. Lancez le projet en exécutant `EventsAppApplication.java`.
 5. Rendez-vous à l'adresse suivante pour voir l'application en action : http://localhost:9090
 
+## Notes
+Dans "application.properties", Remplacez "spring.mail.username" et "spring.mail.password" par ton Gmail et son mot de passe d'application , et "stripe.api.key" par le mot de passe secret que vous pouvez recuperer via ton compte "Stripe" 
+
 ## Auteur
 - **Youssef Echati**  
 
