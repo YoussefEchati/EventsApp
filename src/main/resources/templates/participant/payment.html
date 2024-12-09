@@ -61,7 +61,7 @@
 
 <!-- Script pour le paiement avec Stripe -->
 <script th:inline="javascript">
-    const stripe = Stripe('pk_test_51QO54ZK7eimpfocD8w86ctQy6K2lyH5uYeJhMKSd3kPTdkEVLOxSyXIHNPbwQCATEkBUlvl46XUVgtFTS5pBTdvX00YBz1WLWn'); // Clé publique Stripe
+    const stripe = Stripe('Stripe public key'); // Clé publique Stripe
 
     document.getElementById('checkout-button').addEventListener('click', function (event) {
         event.preventDefault();
