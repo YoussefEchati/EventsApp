@@ -24,8 +24,8 @@ EventsApp est une application web développée avec Spring Boot qui permet de g�
 5. Rendez-vous à l'adresse suivante pour voir l'application en action : http://localhost:9090
 
 ## Notes
--Après le lancement de l'application, un utilisateur avec username "admin" et mot de passe "12345" va être crée. Utilisez-le pour accéder au Dashboard.
--Dans "application.properties", Remplacez "spring.mail.username" et "spring.mail.password" par ton Gmail et son mot de passe d'application , et "stripe.api.key" par le mot de passe secret que vous pouvez recuperer via ton compte "Stripe" 
+1. Après le lancement de l'application, un utilisateur avec username "admin" et mot de passe "12345" va être crée. Utilisez-le pour accéder au Dashboard.
+2. Dans "application.properties", Remplacez "spring.mail.username" et "spring.mail.password" par ton Gmail et son mot de passe d'application , et "stripe.api.key" par le mot de passe secret que vous pouvez recuperer via ton compte "Stripe" 
 
 ## Auteur
 - **Youssef Echati**  
